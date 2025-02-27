@@ -50,6 +50,10 @@ class Neuron:
     def relu(self):
         out = Neuron(data = max(0, self.data), children=(self,))
 
+        def backward():
+            self.grad += (1.0 if self.data > 0 else 0.0) * out.grad
+
+        out.backward_ = backward
         return out
 
     def __repr__(self):
